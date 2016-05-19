@@ -16,7 +16,7 @@
         android:text="Nova Obra"
         android:id="@+id/novaObra"
         android:layout_gravity="center_horizontal"
-        android:textSize="50dp"
+        android:textSize="40dp"
         android:textStyle="bold"
         android:gravity="center" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/titol_etiqueta"
             android:text="Títol:"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp" />
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:text="Preu:"
             android:id="@+id/preu_etiqueta"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:text="Durada:"
             android:id="@+id/dur_etiqueta"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp" />
 
@@ -101,25 +101,26 @@
             android:layout_height="wrap_content"
             android:text="Descripció:"
             android:id="@+id/desc_etiqueta"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_margin="5dp"
             android:layout_marginLeft="5dp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/descripcio"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp" />
     </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/descripcio"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Selecciona data d&apos;inici"
         android:id="@+id/dataInit"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_margin="5dp"
         android:layout_marginLeft="5dp"
         android:textStyle="bold" />
@@ -130,7 +131,7 @@
         android:text="Selecciona data final"
         android:id="@+id/dataFi"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp" />
 
@@ -140,7 +141,7 @@
         android:text="Afegir obra"
         android:id="@+id/afegeix"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal" />
 
