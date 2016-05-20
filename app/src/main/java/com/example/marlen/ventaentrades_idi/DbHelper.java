@@ -95,6 +95,12 @@ public class DbHelper extends SQLiteOpenHelper {
                 values);
     }
 
+
+    //borrar BD
+    public void deleteBD (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(OBRA_TABLE, null, null);    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

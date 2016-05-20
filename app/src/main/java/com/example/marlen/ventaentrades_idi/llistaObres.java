@@ -1,5 +1,6 @@
 package com.example.marlen.ventaentrades_idi;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class llistaObres extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), afegirObra.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -83,8 +85,41 @@ public class llistaObres extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.borrarBD) {
+            baseDades.deleteBD();
+            Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+            startActivity(intent);
+            finish();
             return true;
+        }
+        if(id == R.id.initData){
+            ContentValues values = new ContentValues();
+            values.put(baseDades.CN_TITOL, String.valueOf("Grease")); //content values per passar valor a la BD
+            values.put(baseDades.CN_PREU, String.valueOf("40"));
+            values.put(baseDades.CN_DURADA,120);
+            values.put(baseDades.CN_DESC,String.valueOf("La vida es una lenteja"));
+            values.put(baseDades.CN_DATA,String.valueOf("31-02-3000"));
+            baseDades.createObra(values, "Obra");
+
+            values = new ContentValues();
+            values.put(baseDades.CN_TITOL, String.valueOf("Hairspray")); //content values per passar valor a la BD
+            values.put(baseDades.CN_PREU, String.valueOf("30"));
+            values.put(baseDades.CN_DURADA,90);
+            values.put(baseDades.CN_DESC,String.valueOf("Amigo mío si tuvieras laca"));
+            values.put(baseDades.CN_DATA,String.valueOf("45-21-1975"));
+            baseDades.createObra(values, "Obra");
+
+            values = new ContentValues();
+            values.put(baseDades.CN_TITOL, String.valueOf("Les Miserables")); //content values per passar valor a la BD
+            values.put(baseDades.CN_PREU, String.valueOf("60"));
+            values.put(baseDades.CN_DURADA,95);
+            values.put(baseDades.CN_DESC,String.valueOf("Cosette me molas mucho teta"));
+            values.put(baseDades.CN_DATA,String.valueOf("28-07-1993"));
+            baseDades.createObra(values, "Obra");
+
+            Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

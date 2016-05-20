@@ -1,6 +1,8 @@
 package com.example.marlen.ventaentrades_idi;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,6 +20,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     Button btAfegir;
     EditText titol, preu, durada, descr;
     TextView titol_et, preu_et, dur_et, descr_et, dataIni, dataFi;
+    DbHelper baseDades;
 
     //per les dates d'inici i final
     private DatePickerDialog fromDatePickerDialog;
@@ -51,6 +55,8 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         dataIni.setOnClickListener(this);
         dataFi.setOnClickListener(this);
 
+        baseDades = new DbHelper(this);
+
         //es declara el calendari i guardem la data que apretem als dos textViews
         Calendar newCalendar = Calendar.getInstance();
         fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -78,6 +84,17 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.afegeix:
+                ContentValues values = new ContentValues();
+                values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
+                values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
+                values.put(baseDades.CN_DURADA,String.valueOf(durada.getText()));
+                values.put(baseDades.CN_DESC,String.valueOf(descr.getText()));
+                values.put(baseDades.CN_DATA,String.valueOf(dataIni.getText()));
+                baseDades.createObra(values, "Obra");
+                Toast.makeText(getApplicationContext(), "Obra afegida", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.dataInit:
                 fromDatePickerDialog.show();
@@ -87,5 +104,12 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
                 break;
         }
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+        startActivity(intent);
+        finish();
     }
 }

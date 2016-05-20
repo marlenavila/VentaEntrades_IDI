@@ -28,7 +28,10 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
     @Override
     public void onBindViewHolder(MyCustomAdapter.AdapterViewHolder holder, int position) {
         holder.titol.setText(obres.get(position).getTitol());
-        holder.preu.setText(obres.get(position).getPreu().toString());
+        holder.preu.setText(obres.get(position).getPreu().toString() + "€");
+        if(position %2 == 0)
+            holder.itemView.setBackgroundColor(0xFFCFD8DC);
+        else holder.itemView.setBackgroundColor(0xFFB0BEC5);
     }
 
     @Override
