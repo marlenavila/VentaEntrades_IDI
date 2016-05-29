@@ -5,15 +5,18 @@ package com.example.marlen.ventaentrades_idi;
  */
 public class Obra {
     //en principi només utilitzaré els paràmetres que vull mostrar al recycler
-    private String titol;
-    private int preu;
+    private String titol, data, descr;
+    private int preu, durada,but_disp;
 
 
     //constructora amb paràmetres concrets
-    Obra(String titol, int preu){
+    Obra(String titol, String data, int preu, int durada, String descr, int but_disp){
         this.titol = titol;
+        this.data = data;
         this.preu = preu;
-        //this.image = image;
+        this.durada = durada;
+        this.descr = descr;
+        this.but_disp = but_disp;
     }
 
     //constructora buida
@@ -23,6 +26,18 @@ public class Obra {
     public String getTitol(){ return titol; }
     public void setTitol(String titol){ this.titol = titol; }
 
+    public String getData(){ return data; }
+    public void setData(String data){ this.data = data; }
+
     public Integer getPreu(){ return preu; }
     public void setPreu(int preu){ this.preu = preu; }
+
+    public Integer getDurada(){ return durada; }
+    public void setDurada(int durada){ this.durada = durada; }
+
+    public String getDescr(){ return descr; }
+    public void setDescr(String descr){ this.descr = descr; }
+
+    public Integer getButDisp(){ return but_disp; }
+    public void setButDisp(int but_disp){ this.but_disp = but_disp; }
 }

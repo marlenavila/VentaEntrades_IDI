@@ -11,8 +11,7 @@
         <activity
             android:name=".llistaObres"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +20,11 @@
         </activity>
         <activity android:name=".DbHelper" />
         <activity android:name=".MyCustomAdapter" />
-        <activity android:name=".afegirObra"></activity>
+        <activity android:name=".afegirObra" />
+        <activity android:name=".infoObra" />
+        <activity android:name=".llistaFuncions" />
+        <activity android:name=".MyCustomAdapterDies" />
+        <activity android:name=".PatiButaques"></activity>
     </application>
 
 </manifest>

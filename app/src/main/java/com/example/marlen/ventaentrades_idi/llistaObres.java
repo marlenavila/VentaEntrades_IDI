@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,21 @@ public class llistaObres extends AppCompatActivity {
 
         recView.setLayoutManager(manager);
 
+        //per poder clickar elements del recycler (les files)
+        recView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        Bundle b = new Bundle();
+                        b.putString("titol",obres.get(position).getTitol());
+                        Intent intent = new Intent(getApplicationContext(), infoObra.class);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+        );
+
         //accedeixo a la BD per mostrar les dades que m'interessen de les obres
         //i anar emplenant l'arraylist d'obres
         Cursor c = baseDades.getAllObres();
@@ -46,11 +62,9 @@ public class llistaObres extends AppCompatActivity {
             do{
                 String titolObra = c.getString(c.getColumnIndex(baseDades.CN_TITOL));
                 Integer preu = c.getInt(c.getColumnIndex(baseDades.CN_PREU));
-                //String profilePic = c.getString(c.getColumnIndex(baseDades.CN_PIC));
                 Obra newObra = new Obra();
                 newObra.setTitol(titolObra);
                 newObra.setPreu(preu);
-                //newUser.setImage(profilePic);
                 obres.add(newObra);
             }while(c.moveToNext());
         }
@@ -85,6 +99,8 @@ public class llistaObres extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
+        //per anar més ràpid pr borrar les dades actuals
         if (id == R.id.borrarBD) {
             baseDades.deleteBD();
             Intent intent = new Intent(getApplicationContext(), llistaObres.class);
@@ -92,6 +108,8 @@ public class llistaObres extends AppCompatActivity {
             finish();
             return true;
         }
+
+        //opció per insertar directament les 3 obres inicials per estalviar feina
         if(id == R.id.initData){
             ContentValues values = new ContentValues();
             values.put(baseDades.CN_TITOL, String.valueOf("Grease")); //content values per passar valor a la BD

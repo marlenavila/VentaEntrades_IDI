@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/llistarCompradors"
+        android:orderInCategory="100"
+        android:title="Veure compradors"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/modificarDades"
+        android:orderInCategory="100"
+        android:title="Modificar dades obra"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/eliminarObra"
+        android:orderInCategory="100"
+        android:title="Eliminar obra"
+        app:showAsAction="never" />
+</menu>

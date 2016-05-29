@@ -21,6 +21,8 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     EditText titol, preu, durada, descr;
     TextView titol_et, preu_et, dur_et, descr_et, dataIni, dataFi;
     DbHelper baseDades;
+    String data1, data2, diaIni, diaFi, mesIni, mesFi, anyIni, anyFi;
+    int diaInicial, diaFinal, mesInicial, mesFinal, cont;
 
     //per les dates d'inici i final
     private DatePickerDialog fromDatePickerDialog;
@@ -80,18 +82,71 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
+
+
+    void calcul_data(){
+        //agafo els valors de la data inicial i final per poder calcular l'interval de dies
+        //triat per l'usuari
+         data1 = dataIni.getText().toString();
+        //ho separo per dia, mes i any per poder fer els càlculs i concatenacions corresponents
+         diaIni = String.valueOf(data1.charAt(0)) + String.valueOf(data1.charAt(1)); //dia
+         mesIni = String.valueOf(data1.charAt(3)) + String.valueOf(data1.charAt(4)); //mes
+         anyIni = String.valueOf(data1.charAt(6)) + String.valueOf(data1.charAt(7)); //any
+         diaInicial = Integer.valueOf(diaIni); //dia passat a integer per poder fer les sumes
+         mesInicial = Integer.valueOf(mesIni); //mes """"""
+         data2 = dataFi.getText().toString();
+         diaFi = String.valueOf(data2.charAt(0)) + String.valueOf(data2.charAt(1)); //dia
+         mesFi = String.valueOf(data2.charAt(3)) + String.valueOf(data2.charAt(4)); //mes
+         anyFi = String.valueOf(data2.charAt(6)) + String.valueOf(data2.charAt(7)); //any
+         diaFinal = Integer.valueOf(diaFi);
+         mesFinal = Integer.valueOf(mesFi);
+
+        if(mesInicial < mesFinal){
+            while (mesInicial < mesFinal){
+                //cas amb els mesos que tenen 31 dies
+                if(mesInicial == 1 || mesInicial == 3 || mesInicial == 5 || mesInicial == 7
+                        || mesInicial == 8 || mesInicial == 10 || mesInicial == 12)
+                    calcul_dies(diaInicial, 31);
+                //cas amb els mesos que tenen 30 dies
+                else if (mesInicial == 4 || mesInicial == 6 || mesInicial == 9 || mesInicial == 11)
+                    calcul_dies(diaInicial, 30);
+                //cas febrer 28 dies
+                else calcul_dies(diaInicial, 28);
+                diaInicial = 1; //en aquest punt s'haurà acabat 1 més i començarem al següent, per tant el dia inicial sempre serà 1
+                ++mesInicial; //passem al mes següent
+            }
+            calcul_dies(diaInicial,diaFinal); //cas final en qualsevol dels casos, que ja estem al mateix mes
+        }
+        else if (diaInicial <= diaFinal) calcul_dies(diaInicial,diaFinal);
+        else  Toast.makeText(getApplicationContext(), "Data incorrecta", Toast.LENGTH_SHORT).show();
+
+    }
+
+    void calcul_dies(int dia1, int dia2){
+        int i;
+        cont = 0;
+        for(i = dia1; i <= dia2; ++i){
+            //creem una fila per cada funció (mateixa obra amb dia diferent)
+            String dataTotal = i +"-"+ mesInicial +"-"+ anyIni;
+            //i passem tota la resta de dades de la obra per guardar-la a la BD
+            ContentValues values = new ContentValues();
+            values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
+            values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
+            values.put(baseDades.CN_DURADA,String.valueOf(durada.getText()));
+            values.put(baseDades.CN_DESC,String.valueOf(descr.getText()));
+            values.put(baseDades.CN_DATA,dataTotal);
+            //creem la obra amb totes les dades corresponents
+            baseDades.createObra(values, "Obra");
+            ++cont; //comptador per controlar quantes entrades em crea a la BD
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.afegeix:
-                ContentValues values = new ContentValues();
-                values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
-                values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
-                values.put(baseDades.CN_DURADA,String.valueOf(durada.getText()));
-                values.put(baseDades.CN_DESC,String.valueOf(descr.getText()));
-                values.put(baseDades.CN_DATA,String.valueOf(dataIni.getText()));
-                baseDades.createObra(values, "Obra");
-                Toast.makeText(getApplicationContext(), "Obra afegida", Toast.LENGTH_SHORT).show();
+                calcul_data();
+                Toast.makeText(getApplicationContext(), String.valueOf(cont), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), llistaObres.class);
                 startActivity(intent);
                 finish();

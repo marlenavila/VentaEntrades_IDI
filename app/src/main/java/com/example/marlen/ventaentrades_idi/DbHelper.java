@@ -34,12 +34,13 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //sentencia global de creacion de la base de datos
     public static final String OBRA_TABLE_CREATE = "CREATE TABLE " + OBRA_TABLE + " ("
-            + CN_TITOL + " TEXT PRIMARY KEY UNIQUE,"
+            + CN_TITOL + " TEXT,"
             + CN_DATA + " TEXT," //si la mateixa funció es fa en dies diferents la data hauria de ser primary key tmbe
             + CN_PREU + " INTEGER,"
             + CN_DURADA + " INTEGER,"
             + CN_DESC + " TEXT,"
-            + CN_BUTAQUES_DISP + " INTEGER);";
+            + CN_BUTAQUES_DISP + " INTEGER, "
+            + "PRIMARY KEY (titolObra, data));"; //clau primària composta titol+data
 
 
     public DbHelper(Context context) {
@@ -54,7 +55,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //per poder mostrar un llistat de totes les obres
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_TITOL,CN_PREU};
+        String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
                 columns,                                // The columns to return
@@ -69,7 +70,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //per poder mostrar tota la info d'una obra
     //mostrarà la obra amb titol igual a "titolObra"
-    public Cursor getUser(String titolObra) {
+    public Cursor getObra(String titolObra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP};
         String[] where = {titolObra};
@@ -81,6 +82,23 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,                                       // don't group the rows
                 null,                                       // don't filter by row groups
                 null                                        // The sort order
+        );
+        return c;
+    }
+
+    //per poder mostrar totes les files d'una mateixa obra però amb dies diferents
+    public Cursor getAllDies(String titolObra) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP};
+        String[] where = {titolObra};
+        Cursor c = db.query(
+                OBRA_TABLE,  // The table to query
+                columns,                                // The columns to return
+                "titolObra=?",                          // The columns for the WHERE clause
+                where,                                  // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                CN_DATA + " ASC"                       // The sort order és alfabètic
         );
         return c;
     }
