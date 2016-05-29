@@ -37,7 +37,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_afegir_obra);
 
         //concretem el format de la data
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
         btAfegir = (Button)findViewById(R.id.afegeix);
 

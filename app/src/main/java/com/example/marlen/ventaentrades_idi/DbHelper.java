@@ -98,7 +98,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 where,                                  // The values for the WHERE clause
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
-                CN_DATA + " ASC"                       // The sort order és alfabètic
+                null                                    // The sort order és alfabètic
         );
         return c;
     }

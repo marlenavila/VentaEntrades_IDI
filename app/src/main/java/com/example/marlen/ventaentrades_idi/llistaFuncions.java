@@ -50,6 +50,7 @@ public class llistaFuncions extends AppCompatActivity {
         );
 
         Cursor c = baseDades.getAllDies(titolRec);
+        int cont = 0;
         //comprovo que la BD no estigui buida
         if(c.moveToFirst()){
             do{
@@ -59,8 +60,10 @@ public class llistaFuncions extends AppCompatActivity {
                 newObra.setData(dataFuncio);
                 newObra.setButDisp(butaques);
                 obres.add(newObra);
+                cont++;
             }while(c.moveToNext());
         }
+        Toast.makeText(getApplicationContext(), String.valueOf(cont), Toast.LENGTH_SHORT).show();
 
         myCustomAdapterDays = new MyCustomAdapterDays();
         recView.setAdapter(myCustomAdapterDays);

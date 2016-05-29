@@ -41,7 +41,6 @@ public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDay
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder{
         public TextView data, but_disp;
-        //public ImageView foto;
         public View v;
         public AdapterViewHolder(View itemView) {
             super(itemView);
