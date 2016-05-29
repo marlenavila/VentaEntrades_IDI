@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class afegirObra extends AppCompatActivity implements View.OnClickListener {
@@ -23,6 +25,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     DbHelper baseDades;
     String data1, data2, diaIni, diaFi, mesIni, mesFi, anyIni, anyFi;
     int diaInicial, diaFinal, mesInicial, mesFinal, cont;
+    long dataMilisegs;
 
     //per les dates d'inici i final
     private DatePickerDialog fromDatePickerDialog;
@@ -128,6 +131,13 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         for(i = dia1; i <= dia2; ++i){
             //creem una fila per cada funció (mateixa obra amb dia diferent)
             String dataTotal = i +"-"+ mesInicial +"-"+ anyIni;
+            //traduim a milis per poder ordenar la data de vella a nova desde la BD (per quan es mostri al Recycler de les funcions)
+            try {
+                Date oldDate = dateFormatter.parse(dataTotal);
+                dataMilisegs = oldDate.getTime();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             //i passem tota la resta de dades de la obra per guardar-la a la BD
             ContentValues values = new ContentValues();
             values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
@@ -135,6 +145,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
             values.put(baseDades.CN_DURADA,String.valueOf(durada.getText()));
             values.put(baseDades.CN_DESC,String.valueOf(descr.getText()));
             values.put(baseDades.CN_DATA,dataTotal);
+            values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
             //creem la obra amb totes les dades corresponents
             baseDades.createObra(values, "Obra");
             ++cont; //comptador per controlar quantes entrades em crea a la BD
