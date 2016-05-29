@@ -16,6 +16,7 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
     TextView titol, et_preu, preu, et_durada, durada, et_descr, descr;
     Button comprar;
     DbHelper baseDades;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,10 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
             return true;
         }
         if (id == R.id.eliminarObra){
+            baseDades.deleteObra(titol.getText().toString());
+            intent = new Intent(getApplicationContext(), llistaObres.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -76,7 +81,7 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+        intent = new Intent(getApplicationContext(), llistaObres.class);
         startActivity(intent);
         finish();
     }
@@ -87,7 +92,7 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
             case R.id.comprarEntrada:
                 Bundle b = new Bundle();
                 b.putString("titol",titol.getText().toString());
-                Intent intent = new Intent(getApplicationContext(), llistaFuncions.class);
+                intent = new Intent(getApplicationContext(), llistaFuncions.class);
                 intent.putExtras(b);
                 startActivity(intent);
                 break;

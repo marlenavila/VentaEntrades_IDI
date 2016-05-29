@@ -118,8 +118,20 @@ public class DbHelper extends SQLiteOpenHelper {
                 values);
     }
 
+    //esborrar obra
+    public void deleteObra(String titolObra){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] where = {titolObra};
+        db.delete(
+                OBRA_TABLE,
+                "titolObra=?",
+                where
+        );
 
-    //borrar BD
+    }
+
+
+    //esborrar BD
     public void deleteBD (){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(OBRA_TABLE, null, null);    }
