@@ -1,5 +1,7 @@
 package com.example.marlen.ventaentrades_idi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class infoObra extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,10 +72,26 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
             return true;
         }
         if (id == R.id.eliminarObra){
-            baseDades.deleteObra(titol.getText().toString());
-            intent = new Intent(getApplicationContext(), llistaObres.class);
-            startActivity(intent);
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Segur que vols eliminar aquesta obra?");
+            builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                   baseDades.deleteObra(titol.getText().toString());
+                    intent = new Intent(getApplicationContext(), llistaObres.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
             return true;
         }
         return super.onOptionsItemSelected(item);

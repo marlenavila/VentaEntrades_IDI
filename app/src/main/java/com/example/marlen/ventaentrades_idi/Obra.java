@@ -4,7 +4,7 @@ package com.example.marlen.ventaentrades_idi;
  * Created by marlen on 19/05/2016.
  */
 public class Obra {
-    //en principi només utilitzaré els paràmetres que vull mostrar al recycler
+
     private String titol, data, descr;
     private int preu, durada,but_disp;
 

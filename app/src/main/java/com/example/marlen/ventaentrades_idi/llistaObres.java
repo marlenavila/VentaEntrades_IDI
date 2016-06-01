@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class llistaObres extends AppCompatActivity {
+public class llistaObres extends AppCompatActivity implements RecyclerItemClickListener.OnItemClickListener {
 
     DbHelper baseDades;
     RecyclerView recView;
@@ -38,21 +37,7 @@ public class llistaObres extends AppCompatActivity {
         manager = new LinearLayoutManager(this);
 
         recView.setLayoutManager(manager);
-
-        //per poder clickar elements del recycler (les files)
-        recView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-                        Bundle b = new Bundle();
-                        b.putString("titol",obres.get(position).getTitol());
-                        Intent intent = new Intent(getApplicationContext(), infoObra.class);
-                        intent.putExtras(b);
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-        );
+        recView.addOnItemTouchListener(new RecyclerItemClickListener(this,this));
 
         //accedeixo a la BD per mostrar les dades que m'interessen de les obres
         //i anar emplenant l'arraylist d'obres
@@ -141,5 +126,21 @@ public class llistaObres extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //per clicar a una de les files del Recycler (mètodes de la classe RecyclerItemClickListener
+    @Override
+    public void onItemClick(View childView, int position) {
+        Bundle b = new Bundle();
+        b.putString("titol",obres.get(position).getTitol());
+        Intent intent = new Intent(getApplicationContext(), infoObra.class);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onItemLongPress(View childView, int position) {
+
     }
 }

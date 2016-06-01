@@ -24,7 +24,8 @@
         <activity android:name=".infoObra" />
         <activity android:name=".llistaFuncions" />
         <activity android:name=".MyCustomAdapterDies" />
-        <activity android:name=".PatiButaques"></activity>
+        <activity android:name=".PatiButaques" />
+        <activity android:name=".llistaCompradors"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 package com.example.marlen.ventaentrades_idi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +13,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class llistaFuncions extends AppCompatActivity {
+public class llistaFuncions extends AppCompatActivity implements RecyclerItemClickListener.OnItemClickListener {
 
     DbHelper baseDades;
     RecyclerView recView;
     LinearLayoutManager manager;
     MyCustomAdapterDays myCustomAdapterDays;
+    String titolRec;
+    Intent intent;
 
     ArrayList<Obra> obres = new ArrayList<>();
 
@@ -30,24 +34,10 @@ public class llistaFuncions extends AppCompatActivity {
         manager = new LinearLayoutManager(this);
 
         recView.setLayoutManager(manager);
+        recView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
 
         Bundle b = getIntent().getExtras();
-        final String titolRec = b.getString("titol");
-
-        //per poder clickar elements del recycler (les files)
-        recView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-                        Bundle b = new Bundle();
-                        b.putString("titol",titolRec);
-                        b.putInt("butaques", obres.get(position).getButDisp());
-                        Intent intent = new Intent(getApplicationContext(), PatiButaques.class);
-                        intent.putExtras(b);
-                        startActivity(intent);
-                    }
-                })
-        );
+        titolRec = b.getString("titol");
 
         Cursor c = baseDades.getAllDies(titolRec);
         int cont = 0;
@@ -68,5 +58,37 @@ public class llistaFuncions extends AppCompatActivity {
         myCustomAdapterDays = new MyCustomAdapterDays();
         recView.setAdapter(myCustomAdapterDays);
         myCustomAdapterDays.setData(obres);
+    }
+
+    @Override
+    public void onItemClick(View childView, int position) {
+        Bundle b = new Bundle();
+        b.putString("titol",titolRec);
+        b.putInt("butaques", obres.get(position).getButDisp());
+        intent = new Intent(getApplicationContext(), PatiButaques.class);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+
+    //Per fer una acció concreta si una de les files es manté clickada (mètode classe RecyclerItemClickListener)
+    @Override
+    public void onItemLongPress(View childView, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Vols veure els compradors d'aquesta funció?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                intent = new Intent(getApplicationContext(), llistaCompradors.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
