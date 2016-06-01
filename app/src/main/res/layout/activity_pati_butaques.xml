@@ -1,12 +1,538 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marlen.ventaentrades_idi.PatiButaques">
 
-</RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/escenari_et"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:text="Escenari:"
+                android:layout_marginLeft="0dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="títol"
+                android:id="@+id/esc_titolObra"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:id="@+id/butaca1"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="2"
+                android:id="@+id/butaca2"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:id="@+id/butaca3"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="4"
+                android:id="@+id/butaca4"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="5"
+                android:id="@+id/butaca5"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="6"
+                android:id="@+id/butaca6"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="7"
+                android:id="@+id/butaca7"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="8"
+                android:id="@+id/butaca8"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="9"
+                android:id="@+id/butaca9"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="10"
+                android:id="@+id/butaca10"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="11"
+                android:id="@+id/butaca11"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="12"
+                android:id="@+id/butaca12"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="13"
+                android:id="@+id/butaca13"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="14"
+                android:id="@+id/butaca14"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="15"
+                android:id="@+id/butaca15"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="16"
+                android:id="@+id/butaca16"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="17"
+                android:id="@+id/butaca17"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="18"
+                android:id="@+id/butaca18"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="19"
+                android:id="@+id/butaca19"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="20"
+                android:id="@+id/butaca20"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="21"
+                android:id="@+id/butaca21"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="22"
+                android:id="@+id/butaca22"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="23"
+                android:id="@+id/butaca23"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="24"
+                android:id="@+id/butaca24"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="25"
+                android:id="@+id/butaca25"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="26"
+                android:id="@+id/butaca26"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="27"
+                android:id="@+id/butaca27"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="28"
+                android:id="@+id/butaca28"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="29"
+                android:id="@+id/butaca29"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="30"
+                android:id="@+id/butaca30"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="31"
+                android:id="@+id/butaca31"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="32"
+                android:id="@+id/butaca32"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="33"
+                android:id="@+id/butaca33"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="34"
+                android:id="@+id/butaca34"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="35"
+                android:id="@+id/butaca35"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="36"
+                android:id="@+id/butaca36"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="37"
+                android:id="@+id/butaca37"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="38"
+                android:id="@+id/butaca38"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="39"
+                android:id="@+id/butaca39"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="40"
+                android:id="@+id/butaca40"
+                android:layout_weight="1"
+                android:background="#9E9E9E"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="següent"
+                android:id="@+id/next"
+                android:layout_weight="1"
+                android:background="#546E7A"
+                android:layout_margin="3dp"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
