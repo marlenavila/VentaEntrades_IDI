@@ -21,6 +21,7 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
     MyCustomAdapterDays myCustomAdapterDays;
     String titolRec;
     Intent intent;
+    int pos;
 
     ArrayList<Obra> obres = new ArrayList<>();
 
@@ -76,13 +77,17 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
 
     //Per fer una acció concreta si una de les files es manté clickada (mètode classe RecyclerItemClickListener)
     @Override
-    public void onItemLongPress(View childView, int position) {
+    public void onItemLongPress(View childView, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Vols veure els compradors d'aquesta funció?");
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Bundle b = new Bundle();
+                b.putString("titol",titolRec);
+                b.putString("data",obres.get(position).getData());
                 intent = new Intent(getApplicationContext(), llistaCompradors.class);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });

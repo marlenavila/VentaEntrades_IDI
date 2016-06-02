@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class infoCompra extends AppCompatActivity implements View.OnClickListener {
 
     TextView titolObra, preu;
+    EditText correu;
     long num;
     DbHelper baseDades;
     RadioButton CJove, CAturat, CUniv;
@@ -27,6 +29,8 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_info_compra);
 
         baseDades = new DbHelper(this);
+
+        correu = (EditText)findViewById(R.id.correu);
 
         titolObra = (TextView)findViewById(R.id.titolCompra);
         preu = (TextView)findViewById(R.id.preuCompra);
@@ -86,6 +90,7 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
             case (R.id.done):
                 baseDades.updateNum(titolObra.getText().toString(),data,num);
                 baseDades.updateNumButDisp(titolObra.getText().toString(),data,numbutaquesIni-entrades);
+                baseDades.updateCorreus(titolObra.getText().toString(),data,correu.getText().toString());
                 Intent intent = new Intent(getApplicationContext(), llistaObres.class);
                 startActivity(intent);
                 break;

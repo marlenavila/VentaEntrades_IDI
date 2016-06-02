@@ -175,6 +175,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 new String[]{titolObra,data});
     }
 
+    //actualitzar string de correus d'una funció concreta
+    public void updateCorreus(String titolObra, String data, String correu){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String aux;
+        aux = CN_CORREUS + correu + "~"; //concateno els correus que es van afegint i els separo amb ~
+        ContentValues cv = new ContentValues();
+        cv.put(CN_CORREUS,aux);
+        db.update(OBRA_TABLE, cv, CN_TITOL + "=?" + " and " + CN_DATA + "=?",
+                new String[]{titolObra,data});
+    }
+
     //esborrar BD
     public void deleteBD (){
         SQLiteDatabase db = this.getWritableDatabase();

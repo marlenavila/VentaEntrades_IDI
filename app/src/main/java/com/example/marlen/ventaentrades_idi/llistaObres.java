@@ -94,6 +94,12 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             return true;
         }
 
+        String auxcorreu = "~";
+
+        for(int i = 0; i < 10; i++){
+            auxcorreu = auxcorreu+i+"usuari@gmail.com"+"~";
+        }
+
         //opció per insertar directament les 3 obres inicials per estalviar feina
         if(id == R.id.initData){
             ContentValues values = new ContentValues();
@@ -104,7 +110,11 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DATA,String.valueOf("31-02-3000"));
             values.put(baseDades.CN_BUTAQUES,String.valueOf(1204));
             values.put(baseDades.CN_BUTAQUES_DISP,String.valueOf(35));
+            values.put(baseDades.CN_CORREUS, auxcorreu);
             baseDades.createObra(values, "Obra");
+            values.put(baseDades.CN_DATA,String.valueOf("45-21-1975"));
+            baseDades.createObra(values, "Obra");
+
 
             values = new ContentValues();
             values.put(baseDades.CN_TITOL, String.valueOf("Hairspray")); //content values per passar valor a la BD
@@ -114,6 +124,9 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DATA,String.valueOf("45-21-1975"));
             values.put(baseDades.CN_BUTAQUES,String.valueOf(2));
             values.put(baseDades.CN_BUTAQUES_DISP,String.valueOf(39));
+            values.put(baseDades.CN_CORREUS, auxcorreu);
+            baseDades.createObra(values, "Obra");
+            values.put(baseDades.CN_DATA,String.valueOf("45-21-1976"));
             baseDades.createObra(values, "Obra");
 
             values = new ContentValues();
@@ -124,6 +137,9 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DATA,String.valueOf("28-07-1993"));
             values.put(baseDades.CN_BUTAQUES,String.valueOf(3896));
             values.put(baseDades.CN_BUTAQUES_DISP,String.valueOf(33));
+            values.put(baseDades.CN_CORREUS, auxcorreu);
+            baseDades.createObra(values, "Obra");
+            values.put(baseDades.CN_DATA,String.valueOf("45-21-1976"));
             baseDades.createObra(values, "Obra");
 
             Intent intent = new Intent(getApplicationContext(), llistaObres.class);

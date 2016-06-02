@@ -16,7 +16,7 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
     Button[] butaques = new Button[41];
     Butaques but;
     long num, hola;
-    int num_entrades = 0, num_butaques_disp = 0;
+    int num_entrades = 0;
     ImageView next;
     String data;
 
@@ -57,16 +57,19 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.next:
-                Bundle b = new Bundle();
-
-                b.putString("titol",titolEsc.getText().toString());
-                b.putInt("entrades", num_entrades);
-                b.putLong("numero", hola);
-                b.putString("data", data);
-                //b.putInt("numButs", num_butaques_disp);
-                Intent intent = new Intent(getApplicationContext(), infoCompra.class);
-                intent.putExtras(b);
-                startActivity(intent);
+                if(num_entrades == 0)
+                    Toast.makeText(getApplicationContext(), "Has de seleccionar alguna butaca", Toast.LENGTH_SHORT).show();
+                else {
+                    Bundle b = new Bundle();
+                    b.putString("titol", titolEsc.getText().toString());
+                    b.putInt("entrades", num_entrades);
+                    b.putLong("numero", hola);
+                    b.putString("data", data);
+                    //b.putInt("numButs", num_butaques_disp);
+                    Intent intent = new Intent(getApplicationContext(), infoCompra.class);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
                 break;
             default:
                 for(int i = 0; i <=40; i++){
@@ -75,14 +78,11 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
                             hola = but.canviarbutaca(i); //la poso a 0
                             butaques[i].setBackgroundColor(0xFF8BC34A); //i en color verd (desmarcar)
                             num_entrades--;
-                            //num_butaques_disp--;
-                            Toast.makeText(getApplicationContext(), Long.toBinaryString(hola), Toast.LENGTH_SHORT).show();
                         }
                         else{
                             hola = but.canviarbutaca(i); //la poso a 0
                             butaques[i].setBackgroundColor(0xFFF44336);
                             num_entrades++;
-                            //num_butaques_disp++;
                         }
                     }
                 }
