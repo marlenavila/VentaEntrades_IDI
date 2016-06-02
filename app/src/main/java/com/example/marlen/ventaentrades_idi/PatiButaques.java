@@ -70,12 +70,12 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
                         if(but.consultarbutaca(i)){ //si ja està clickada (estat 1)
                             but.canviarbutaca(i); //la poso a 0
                             butaques[i].setBackgroundColor(0xFF8BC34A); //i en color verd (desmarcar)
-                            num_entrades++;
+                            num_entrades--;
                         }
                         else{
                             but.canviarbutaca(i);
                             butaques[i].setBackgroundColor(0xFFF44336);
-                            num_entrades--;
+                            num_entrades++;
                         }
                     }
                 }

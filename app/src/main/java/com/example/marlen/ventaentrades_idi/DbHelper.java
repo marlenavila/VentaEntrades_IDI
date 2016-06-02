@@ -26,6 +26,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static String CN_BUTAQUES = "butaques";
 
+    public static String CN_CORREUS = "correus";
+
 
     //Declaracion del nombre de la base de datos
     public static final int DATABASE_VERSION = 1;
@@ -46,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
             + CN_BUTAQUES_DISP + " INTEGER,"
             + CN_MILIS + " LONG, "
             + CN_BUTAQUES + " LONG, "
+            + CN_CORREUS + " STRING, "
             + "PRIMARY KEY (titolObra, data));"; //clau primària composta titol+data
 
 
@@ -62,7 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                            CN_MILIS, CN_BUTAQUES};
+                            CN_MILIS, CN_BUTAQUES, CN_CORREUS};
         Cursor c = db.query(
                 true,  //DISTINCT
                 OBRA_TABLE,  // The table to query
@@ -82,7 +85,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getObra(String titolObra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                            CN_MILIS,CN_BUTAQUES};
+                            CN_MILIS,CN_BUTAQUES,CN_CORREUS};
         String[] where = {titolObra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -100,7 +103,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllDies(String titolObra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                            CN_MILIS,CN_BUTAQUES};
+                            CN_MILIS,CN_BUTAQUES,CN_CORREUS};
         String[] where = {titolObra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
