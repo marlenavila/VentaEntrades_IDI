@@ -1,10 +1,12 @@
 package com.example.marlen.ventaentrades_idi;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
     Butaques but;
     long num;
     int num_entrades = 0;
+    ImageView next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,9 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
 
         esc_et = (TextView)findViewById(R.id.escenari_et);
         titolEsc = (TextView)findViewById(R.id.esc_titolObra);
+
+        next = (ImageView)findViewById(R.id.next);
+        next.setOnClickListener(this);
 
         Bundle b = getIntent().getExtras();
         String titolRec = b.getString("titol");
@@ -37,7 +43,6 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
             butaques[i] = (Button)findViewById(resources.getIdentifier("butaca" + i,"id", nom));
             butaques[i].setOnClickListener(this);
         }
-        Toast.makeText(getApplicationContext(), String.valueOf(but.mytoString2()), Toast.LENGTH_LONG).show();
         for(int i = 1; i <= 40; i++){
             if(but.consultarbutaca(i)){ //si l'estat de la butaca és 1
                 butaques[i].setBackgroundColor(0xFF9E9E9E);
@@ -50,6 +55,14 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.next:
+                Bundle b = new Bundle();
+                b.putString("titol",titolEsc.getText().toString());
+                //b.putInt("butaques",);
+                b.putInt("entrades", num_entrades);
+                b.putLong("numero", num);
+                Intent intent = new Intent(getApplicationContext(), infoCompra.class);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             default:
                 for(int i = 0; i <=40; i++){
