@@ -146,6 +146,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
             values.put(baseDades.CN_DESC,String.valueOf(descr.getText()));
             values.put(baseDades.CN_DATA,dataTotal);
             values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
+            values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
             //creem la obra amb totes les dades corresponents
             baseDades.createObra(values, "Obra");
             ++cont; //comptador per controlar quantes entrades em crea a la BD

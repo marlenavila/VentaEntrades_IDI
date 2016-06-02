@@ -102,6 +102,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DURADA,120);
             values.put(baseDades.CN_DESC,String.valueOf("La vida es una lenteja"));
             values.put(baseDades.CN_DATA,String.valueOf("31-02-3000"));
+            values.put(baseDades.CN_BUTAQUES,String.valueOf(1204));
             baseDades.createObra(values, "Obra");
 
             values = new ContentValues();
@@ -110,6 +111,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DURADA,90);
             values.put(baseDades.CN_DESC,String.valueOf("Amigo mío si tuvieras laca"));
             values.put(baseDades.CN_DATA,String.valueOf("45-21-1975"));
+            values.put(baseDades.CN_BUTAQUES,String.valueOf(2));
             baseDades.createObra(values, "Obra");
 
             values = new ContentValues();
@@ -118,6 +120,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DURADA,95);
             values.put(baseDades.CN_DESC,String.valueOf("Cosette me molas mucho teta"));
             values.put(baseDades.CN_DATA,String.valueOf("28-07-1993"));
+            values.put(baseDades.CN_BUTAQUES,String.valueOf(3896));
             baseDades.createObra(values, "Obra");
 
             Intent intent = new Intent(getApplicationContext(), llistaObres.class);
@@ -141,6 +144,11 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
 
     @Override
     public void onItemLongPress(View childView, int position) {
-
+        long num = 0;
+        int i = 3;
+        num |= (1<<i);
+        num^=(1<<i);
+        Boolean hola = (num&(1<<i)) != 0;
+        Toast.makeText(getApplicationContext(), hola.toString(), Toast.LENGTH_SHORT).show();
     }
 }

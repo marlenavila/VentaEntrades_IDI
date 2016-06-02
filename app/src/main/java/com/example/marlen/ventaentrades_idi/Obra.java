@@ -7,6 +7,7 @@ public class Obra {
 
     private String titol, data, descr;
     private int preu, durada,but_disp;
+    private long num;
 
 
     //constructora amb paràmetres concrets
@@ -40,4 +41,7 @@ public class Obra {
 
     public Integer getButDisp(){ return but_disp; }
     public void setButDisp(int but_disp){ this.but_disp = but_disp; }
+
+    public Long getNumBut(){ return num; }
+    public void setNumBut(long num){ this.num = num; }
 }

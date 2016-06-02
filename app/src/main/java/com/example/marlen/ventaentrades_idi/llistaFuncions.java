@@ -46,9 +46,11 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
             do{
                 String dataFuncio = c.getString(c.getColumnIndex(baseDades.CN_DATA));
                 Integer butaques = c.getInt(c.getColumnIndex(baseDades.CN_BUTAQUES_DISP));
+                Long numero = c.getLong(c.getColumnIndex(baseDades.CN_BUTAQUES));
                 Obra newObra = new Obra();
                 newObra.setData(dataFuncio);
                 newObra.setButDisp(butaques);
+                newObra.setNumBut(numero);
                 obres.add(newObra);
                 cont++;
             }while(c.moveToNext());
@@ -65,6 +67,7 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
         Bundle b = new Bundle();
         b.putString("titol",titolRec);
         b.putInt("butaques", obres.get(position).getButDisp());
+        b.putLong("numero", obres.get(position).getNumBut());
         intent = new Intent(getApplicationContext(), PatiButaques.class);
         intent.putExtras(b);
         startActivity(intent);
