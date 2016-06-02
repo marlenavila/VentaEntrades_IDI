@@ -46,10 +46,15 @@ public class Butaques {
        @param i la butaca
        @return El nuevo estado de la butaca
     */
-    public boolean canviarbutaca(int i)
+    public long canviarbutaca(int i)
     {
        // _checkindex(i);
-        return (num^= (1L<<i)) != 0;
+        long caca = (num^= (1L<<i)) ;
+        return caca;
+    }
+
+    public long getButaques(){
+        return num;
     }
 
     public  String mytoString()

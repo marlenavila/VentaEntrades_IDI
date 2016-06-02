@@ -99,6 +99,24 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    //agafar una funció concreta
+    public Cursor getFuncio(String titolObra, String data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
+                CN_MILIS,CN_BUTAQUES,CN_CORREUS};
+        String[] where = {titolObra, data};
+        Cursor c = db.query(
+                OBRA_TABLE,  // The table to query
+                columns,                                    // The columns to return
+                "titolObra=?" + " and " + "data=?",         // The columns for the WHERE clause
+                where,                                      // The values for the WHERE clause
+                null,                                       // don't group the rows
+                null,                                       // don't filter by row groups
+                null                                        // The sort order
+        );
+        return c;
+    }
+
     //per poder mostrar totes les files d'una mateixa obra però amb dies diferents
     public Cursor getAllDies(String titolObra) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -139,6 +157,23 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
+    //actualitzar ristra de bits que em marquen els seients disponibles d'una funció concreta
+    public void updateNum(String titolObra, String data, long num){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CN_BUTAQUES,num);
+        db.update(OBRA_TABLE, cv, CN_TITOL + "=?" + " and " + CN_DATA + "=?",
+                new String[]{titolObra,data});
+    }
+
+    //actualitzar num butaques disponibles per una funció concreta
+    public void updateNumButDisp(String titolObra, String data, int num){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CN_BUTAQUES_DISP,num);
+        db.update(OBRA_TABLE, cv, CN_TITOL + "=?" + " and " + CN_DATA + "=?",
+                new String[]{titolObra,data});
+    }
 
     //esborrar BD
     public void deleteBD (){

@@ -1,5 +1,6 @@
 package com.example.marlen.ventaentrades_idi;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,8 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
     DbHelper baseDades;
     RadioButton CJove, CAturat, CUniv;
     ImageView done;
-    int preuObra = 0;
+    int preuObra = 0, numbutaquesIni, entrades;
+    String data;
     double aux2 = 0.0;
 
     @Override
@@ -39,10 +41,14 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
         Bundle b = getIntent().getExtras();
         num = b.getLong("numero");
         titolObra.setText(b.getString("titol"));
-        int entrades = b.getInt("entrades");
-        Cursor c = baseDades.getObra(titolObra.getText().toString());
-        if(c.moveToFirst())
-            preuObra = Integer.valueOf(c.getString(c.getColumnIndex(baseDades.CN_PREU)));
+        entrades = b.getInt("entrades");
+        data = b.getString("data");
+       // numbutaquesSelec = b.getInt("numButs"); //num butaques seleccionades
+        Cursor c = baseDades.getFuncio(titolObra.getText().toString(),data);
+        if(c.moveToFirst()) {
+            preuObra = c.getInt(c.getColumnIndex(baseDades.CN_PREU));
+            numbutaquesIni = c.getInt(c.getColumnIndex(baseDades.CN_BUTAQUES_DISP)); //numbutaques ABANS compra
+        }
         preuObra = preuObra*entrades;
         aux2 = preuObra;
         preu.setText(aux2 + "€");
@@ -78,8 +84,12 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case (R.id.done):
-
+                baseDades.updateNum(titolObra.getText().toString(),data,num);
+                baseDades.updateNumButDisp(titolObra.getText().toString(),data,numbutaquesIni-entrades);
+                Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+                startActivity(intent);
                 break;
+
         }
     }
 }

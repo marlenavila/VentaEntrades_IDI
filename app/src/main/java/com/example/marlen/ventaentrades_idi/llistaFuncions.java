@@ -68,6 +68,7 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
         b.putString("titol",titolRec);
         b.putInt("butaques", obres.get(position).getButDisp());
         b.putLong("numero", obres.get(position).getNumBut());
+        b.putString("data", obres.get(position).getData());
         intent = new Intent(getApplicationContext(), PatiButaques.class);
         intent.putExtras(b);
         startActivity(intent);

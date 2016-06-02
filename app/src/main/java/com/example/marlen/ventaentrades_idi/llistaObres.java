@@ -103,6 +103,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DESC,String.valueOf("La vida es una lenteja"));
             values.put(baseDades.CN_DATA,String.valueOf("31-02-3000"));
             values.put(baseDades.CN_BUTAQUES,String.valueOf(1204));
+            values.put(baseDades.CN_BUTAQUES_DISP,String.valueOf(35));
             baseDades.createObra(values, "Obra");
 
             values = new ContentValues();
@@ -112,6 +113,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DESC,String.valueOf("Amigo mío si tuvieras laca"));
             values.put(baseDades.CN_DATA,String.valueOf("45-21-1975"));
             values.put(baseDades.CN_BUTAQUES,String.valueOf(2));
+            values.put(baseDades.CN_BUTAQUES_DISP,String.valueOf(39));
             baseDades.createObra(values, "Obra");
 
             values = new ContentValues();
@@ -121,6 +123,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             values.put(baseDades.CN_DESC,String.valueOf("Cosette me molas mucho teta"));
             values.put(baseDades.CN_DATA,String.valueOf("28-07-1993"));
             values.put(baseDades.CN_BUTAQUES,String.valueOf(3896));
+            values.put(baseDades.CN_BUTAQUES_DISP,String.valueOf(33));
             baseDades.createObra(values, "Obra");
 
             Intent intent = new Intent(getApplicationContext(), llistaObres.class);
