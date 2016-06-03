@@ -5,13 +5,13 @@ package com.example.marlen.ventaentrades_idi;
  */
 public class Obra {
 
-    private String titol, data, descr;
-    private int preu, durada,but_disp;
+    private String titol, data, descr, preu;
+    private int  durada,but_disp;
     private long num;
 
 
     //constructora amb paràmetres concrets
-    Obra(String titol, String data, int preu, int durada, String descr, int but_disp){
+    Obra(String titol, String data, String preu, int durada, String descr, int but_disp){
         this.titol = titol;
         this.data = data;
         this.preu = preu;
@@ -30,8 +30,8 @@ public class Obra {
     public String getData(){ return data; }
     public void setData(String data){ this.data = data; }
 
-    public Integer getPreu(){ return preu; }
-    public void setPreu(int preu){ this.preu = preu; }
+    public String getPreu(){ return preu; }
+    public void setPreu(String preu){ this.preu = preu; }
 
     public Integer getDurada(){ return durada; }
     public void setDurada(int durada){ this.durada = durada; }

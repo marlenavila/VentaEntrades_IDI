@@ -46,7 +46,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
         if(c.moveToFirst()){
             do{
                 String titolObra = c.getString(c.getColumnIndex(baseDades.CN_TITOL));
-                Integer preu = c.getInt(c.getColumnIndex(baseDades.CN_PREU));
+                String preu = c.getString(c.getColumnIndex(baseDades.CN_PREU));
                 Obra newObra = new Obra();
                 newObra.setTitol(titolObra);
                 newObra.setPreu(preu);
