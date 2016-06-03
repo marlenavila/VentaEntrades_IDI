@@ -175,11 +175,33 @@ public class DbHelper extends SQLiteOpenHelper {
                 new String[]{titolObra,data});
     }
 
+    public Cursor getCorreus(String titolObra, String data){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_CORREUS};
+        String[] where = {titolObra, data };
+        Cursor c = db.query(
+                OBRA_TABLE,  // The table to query
+                columns,                                // The columns to return
+                "titolObra=?" + " and " + "data=?",     // The columns for the WHERE clause
+                where,                                  // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                null                       // The sort order és alfabètic
+        );
+        return c;
+    }
+
     //actualitzar string de correus d'una funció concreta
     public void updateCorreus(String titolObra, String data, String correu){
         SQLiteDatabase db = this.getWritableDatabase();
-        String aux;
-        aux = CN_CORREUS + correu + "~"; //concateno els correus que es van afegint i els separo amb ~
+        Cursor c = getCorreus(titolObra, data);
+        String aux = new String();
+        if(c.moveToFirst()){
+            aux = c.getString(c.getColumnIndex(CN_CORREUS));
+        }
+        if(aux != null)
+            aux = aux + correu + "~"; //concateno els correus que es van afegint i els separo amb ~
+        else aux = correu + "~"; //en el cas del primer correu del string
         ContentValues cv = new ContentValues();
         cv.put(CN_CORREUS,aux);
         db.update(OBRA_TABLE, cv, CN_TITOL + "=?" + " and " + CN_DATA + "=?",
