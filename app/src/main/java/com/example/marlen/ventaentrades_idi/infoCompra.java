@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class infoCompra extends AppCompatActivity implements View.OnClickListener {
 
     TextView titolObra, preu;
@@ -19,9 +21,10 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
     DbHelper baseDades;
     RadioButton CJove, CAturat, CUniv;
     ImageView done;
-    int preuObra = 0, numbutaquesIni, entrades;
+    int  numbutaquesIni, entrades;
     String data;
-    double aux2 = 0.0;
+    double aux2 = 0.0, preuObra = 0.0;
+    DecimalFormat preuTotal = new DecimalFormat("#.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +53,12 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
        // numbutaquesSelec = b.getInt("numButs"); //num butaques seleccionades
         Cursor c = baseDades.getFuncio(titolObra.getText().toString(),data);
         if(c.moveToFirst()) {
-            preuObra = c.getInt(c.getColumnIndex(baseDades.CN_PREU));
+            preuObra = c.getDouble(c.getColumnIndex(baseDades.CN_PREU));
             numbutaquesIni = c.getInt(c.getColumnIndex(baseDades.CN_BUTAQUES_DISP)); //numbutaques ABANS compra
         }
         preuObra = preuObra*entrades;
         aux2 = preuObra;
-        preu.setText(aux2 + "€");
+        preu.setText(preuTotal.format(aux2) + "€");
 
     }
 
@@ -64,22 +67,22 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
         double aux;
         switch (v.getId()){
             case R.id.radiocap:
-                preu.setText(String.valueOf(aux2) + "€");
+                preu.setText(preuTotal.format(aux2) + "€");
                 break;
             case R.id.radiojove:
                     desc = preuObra*0.20;
                     aux = preuObra - desc;
-                    preu.setText(String.valueOf(aux) + "€");
+                    preu.setText(preuTotal.format(aux) + "€");
                 break;
             case R.id.radioaturat:
                     desc = preuObra*0.15;
                     aux = preuObra - desc;
-                    preu.setText(String.valueOf(aux) + "€");
+                    preu.setText(preuTotal.format(aux) + "€");
                 break;
             case R.id.radiouniversitari:
                     desc = preuObra*0.15;
                     aux = preuObra - desc;
-                    preu.setText(String.valueOf(aux) + "€");
+                    preu.setText(preuTotal.format(aux) + "€");
                 break;
         }
     }

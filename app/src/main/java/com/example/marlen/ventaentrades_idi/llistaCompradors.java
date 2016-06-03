@@ -38,10 +38,11 @@ public class llistaCompradors extends AppCompatActivity {
             for(int i = 0; i < aux.length; i++){
                 correus_list.add(aux[i]);
             }
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1,correus_list);
+            lv.setAdapter(arrayAdapter);
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_list_item_1,correus_list);
-        lv.setAdapter(arrayAdapter);
+
 
 
 
