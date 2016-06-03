@@ -31,8 +31,8 @@ public class llistaCompradors extends AppCompatActivity {
         Cursor c = baseDades.getFuncio(titol,data);
         if(c.moveToFirst())
             correus = c.getString(c.getColumnIndex(baseDades.CN_CORREUS));
-
-        String[] aux = correus.split("~");
+        String[] aux = new String[1000];
+        if(correus != null)  aux = correus.split("~");
         List<String> correus_list = new ArrayList<String>();
         if(aux != null){
             for(int i = 0; i < aux.length; i++){
