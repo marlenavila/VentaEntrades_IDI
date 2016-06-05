@@ -20,6 +20,7 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
     Button comprar;
     DbHelper baseDades;
     Intent intent;
+    String titolRec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
         comprar.setOnClickListener(this);
 
         Bundle b = getIntent().getExtras();
-        String titolRec = b.getString("titol");
+        titolRec = b.getString("titol");
         titol.setText(titolRec);
 
         Cursor c = baseDades.getObra(titolRec);
@@ -66,7 +67,10 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.estadistiques){
+            Bundle b = new Bundle();
+            b.putString("titol", titolRec);
             intent = new Intent(getApplicationContext(),Estadistiques.class);
+            intent.putExtras(b);
             startActivity(intent);
             return true;
         }
