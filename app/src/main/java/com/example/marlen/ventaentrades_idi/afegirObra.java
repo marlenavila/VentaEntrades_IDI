@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class afegirObra extends AppCompatActivity implements View.OnClickListener {
-    Button btAfegir;
+    ImageView btAfegir;
     EditText titol, preu, durada, descr;
     TextView titol_et, preu_et, dur_et, descr_et, dataIni, dataFi;
     DbHelper baseDades;
@@ -44,7 +45,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         getDia = new SimpleDateFormat("c"); //per mostrar el dia de la setmana
 
 
-        btAfegir = (Button)findViewById(R.id.afegeix);
+        btAfegir = (ImageView) findViewById(R.id.afegeix);
 
         titol = (EditText)findViewById(R.id.titol);
         preu = (EditText)findViewById(R.id.preu);

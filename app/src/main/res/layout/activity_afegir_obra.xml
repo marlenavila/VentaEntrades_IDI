@@ -18,7 +18,8 @@
         android:gravity="center"
         android:text="Nova Obra"
         android:textSize="40dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#0b0b0b" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,17 +42,18 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Títol:"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/titol"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp" />
+                    android:textSize="20dp"
+                    android:textColor="#0b0b0b" />
 
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/titol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,16 +68,18 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Preu:"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#0b0b0b" />
 
-                <EditText
-                    android:id="@+id/preu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/preu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,16 +93,18 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Durada:"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#0b0b0b" />
 
-                <EditText
-                    android:id="@+id/durada"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/durada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,7 +118,8 @@
                     android:layout_margin="5dp"
                     android:layout_marginLeft="5dp"
                     android:text="Descripció:"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#0b0b0b" />
 
             </LinearLayout>
 
@@ -132,7 +139,8 @@
                 android:layout_marginLeft="5dp"
                 android:text="Selecciona data d&apos;inici"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#0b0b0b" />
 
             <TextView
                 android:id="@+id/dataFi"
@@ -142,17 +150,71 @@
                 android:layout_marginTop="5dp"
                 android:text="Selecciona data final"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#0b0b0b" />
 
-            <Button
-                android:id="@+id/afegeix"
+            <TextView
+                android:id="@+id/kosas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Afegir obra"
-                android:textSize="20dp" />
+                android:text="Tria els dies de la setmana que vols que se'n facin funcions:"
+                android:textSize="15dp" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dilluns"
+                android:id="@+id/dilluns"
+                android:checked="false" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dimarts"
+                android:id="@+id/dimarts"
+                android:checked="false" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dimecres"
+                android:id="@+id/dimecres"
+                android:checked="false" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dijous"
+                android:id="@+id/dijous" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Divendres"
+                android:id="@+id/divendres" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dissabte"
+                android:id="@+id/dissabte" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diumenge"
+                android:id="@+id/diumenge" />
+
+            <ImageView
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:id="@+id/afegeix"
+                android:src="@drawable/quadratick"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
         </LinearLayout>
     </ScrollView>
 
