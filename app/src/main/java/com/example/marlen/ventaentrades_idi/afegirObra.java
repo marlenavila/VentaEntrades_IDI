@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     String data1, data2, diaIni, diaFi, mesIni, mesFi, anyIni, anyFi;
     int diaInicial, diaFinal, mesInicial, mesFinal, cont;
     long dataMilisegs;
+    Switch dilluns, dimarts, dimecres, dijous, divendres, dissabte, diumenge;
 
     //per les dates d'inici i final
     private DatePickerDialog fromDatePickerDialog;
@@ -43,6 +45,14 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         //concretem el format de la data
         dateFormatter = new SimpleDateFormat("dd-MM-yy");
         getDia = new SimpleDateFormat("c"); //per mostrar el dia de la setmana
+
+        dilluns = (Switch)findViewById(R.id.dilluns);
+        dimarts = (Switch)findViewById(R.id.dimarts);
+        dimecres = (Switch)findViewById(R.id.dimecres);
+        dijous = (Switch)findViewById(R.id.dijous);
+        divendres = (Switch)findViewById(R.id.divendres);
+        dissabte = (Switch)findViewById(R.id.dissabte);
+        diumenge = (Switch)findViewById(R.id.diumenge);
 
 
         btAfegir = (ImageView) findViewById(R.id.afegeix);
@@ -141,30 +151,58 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            ContentValues values = new ContentValues();
+            values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
+            values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
+            values.put(baseDades.CN_DURADA, String.valueOf(durada.getText()));
+            values.put(baseDades.CN_DESC, String.valueOf(descr.getText()));
+            values.put(baseDades.CN_DATA, dataTotal);
+            values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
+            values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
+            values.put(baseDades.CN_BUTAQUES_DISP, (40));
+            values.put(baseDades.CN_CORREUS, ("~"));
             String dia = getDia.format(new java.sql.Date(dataMilisegs)); //agafa el dia en l'idioma que estigui el sistema
-            if(dia.equals("Mon") || dia.equals("dl.")) dia = "Dilluns";
-            if(dia.equals("Tue") || dia.equals("dt.")) dia = "Dimarts";
-            if(dia.equals("Wed") || dia.equals("dc.")) dia = "Dimecres";
-            if(dia.equals("Thu") || dia.equals("dj.")) dia = "Dijous";
-            if(dia.equals("Fri") || dia.equals("dv.")) dia = "Divendres";
-            if(dia.equals("Sat") || dia.equals("ds.")) dia = "Dissabte";
-            if(dia.equals("Sun") || dia.equals("dg.")) dia = "Diumenge";
-            //i passem tota la resta de dades de la obra per guardar-la a la BD
-            if (dia.equals("Dilluns") || dia.equals("Dimarts")|| dia.equals("Dimecres")) {
-                ContentValues values = new ContentValues();
-                values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
-                values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
-                values.put(baseDades.CN_DURADA, String.valueOf(durada.getText()));
-                values.put(baseDades.CN_DESC, String.valueOf(descr.getText()));
-                values.put(baseDades.CN_DATA, dataTotal);
-                values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
-                values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
-                values.put(baseDades.CN_BUTAQUES_DISP, (40));
-                values.put(baseDades.CN_CORREUS, ("~"));
-                values.put(baseDades.CN_DIA, (dia));
-                //creem la obra amb totes les dades corresponents
-                baseDades.createObra(values, "Obra");
-               // ++cont; //comptador per controlar quantes entrades em crea a la BD
+            if(dilluns.isChecked()){
+                if(dia.equals("Mon") || dia.equals("dl.")){
+                    values.put(baseDades.CN_DIA, ("Dilluns"));
+                    baseDades.createObra(values, "Obra");
+                }
+            }
+            if(dimarts.isChecked()){
+                if(dia.equals("Tue") || dia.equals("dt.")){
+                    values.put(baseDades.CN_DIA, ("Dimarts"));
+                    baseDades.createObra(values, "Obra");
+                }
+            }
+            if(dimecres.isChecked()){
+                if(dia.equals("Wed") || dia.equals("dc.")){
+                    values.put(baseDades.CN_DIA, ("Dimecres"));
+                    baseDades.createObra(values, "Obra");
+                }
+            }
+            if(dijous.isChecked()){
+                if(dia.equals("Thu") || dia.equals("dj.")){
+                    values.put(baseDades.CN_DIA, ("Dijous"));
+                    baseDades.createObra(values, "Obra");
+                }
+            }
+            if(divendres.isChecked()){
+                if(dia.equals("Fri") || dia.equals("dv.")){
+                    values.put(baseDades.CN_DIA, ("Divendres"));
+                    baseDades.createObra(values, "Obra");
+                }
+            }
+            if(dissabte.isChecked()){
+                if(dia.equals("Sat") || dia.equals("ds.")){
+                    values.put(baseDades.CN_DIA, ("Dissabte"));
+                    baseDades.createObra(values, "Obra");
+                }
+            }
+            if(diumenge.isChecked()){
+                if(dia.equals("Sun") || dia.equals("dg.")){
+                    values.put(baseDades.CN_DIA, ("Diumenge"));
+                    baseDades.createObra(values, "Obra");
+                }
             }
         }
     }
