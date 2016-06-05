@@ -79,6 +79,8 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
         }
         if (id == R.id.eliminarObra){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Eliminar obra");
+            builder.setIcon(R.drawable.wastebin);
             builder.setMessage("Segur que vols eliminar aquesta obra?");
             builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                 @Override

@@ -1,5 +1,6 @@
 package com.example.marlen.ventaentrades_idi;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -78,12 +79,7 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
 
         //per anar més ràpid pr borrar les dades actuals
         if (id == R.id.borrarBD) {
@@ -91,6 +87,19 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
             Intent intent = new Intent(getApplicationContext(), llistaObres.class);
             startActivity(intent);
             finish();
+            return true;
+        }
+        if(id == R.id.about){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("About");
+            builder.setIcon(R.drawable.businesswoman);
+            builder.setMessage(" La Sala\n Autora: Marlen Àvila\n Versió: 1.0\n " +
+                    "marlen.avila@est.fib.upc.edu");
+            /*builder.setMessage("Autora: Marlen Àvila");
+            builder.setMessage("Versió: 1.0");
+            builder.setMessage("marlen.avila@est.fib.upc.edu");*/
+            AlertDialog dialog = builder.create();
+            dialog.show();
             return true;
         }
 
