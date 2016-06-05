@@ -83,6 +83,24 @@ public class DbHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    //m'ho retorna absolutament tot, utilitzat per a calcular les estadístiques
+    public Cursor getAllEverything() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
+                CN_MILIS, CN_BUTAQUES, CN_CORREUS, CN_DIA};
+        Cursor c = db.query(
+                OBRA_TABLE,  // The table to query
+                columns,                                // The columns to return
+                null,                                   // The columns for the WHERE clause
+                null,                                   // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                                   // don't filter by row groups
+                null,                     // The sort order és alfabètic
+                null
+        );
+        return c;
+    }
+
     //per poder mostrar tota la info d'una obra
     //mostrarà la obra amb titol igual a "titolObra"
     public Cursor getObra(String titolObra) {

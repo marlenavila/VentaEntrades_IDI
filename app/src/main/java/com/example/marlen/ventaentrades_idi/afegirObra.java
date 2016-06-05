@@ -223,7 +223,6 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
                 toDatePickerDialog.show();
                 break;
         }
-
     }
 
     @Override
