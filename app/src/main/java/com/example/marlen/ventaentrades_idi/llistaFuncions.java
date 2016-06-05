@@ -48,10 +48,12 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
                 String dataFuncio = c.getString(c.getColumnIndex(baseDades.CN_DATA));
                 Integer butaques = c.getInt(c.getColumnIndex(baseDades.CN_BUTAQUES_DISP));
                 Long numero = c.getLong(c.getColumnIndex(baseDades.CN_BUTAQUES));
+                String dia = c.getString(c.getColumnIndex(baseDades.CN_DIA));
                 Obra newObra = new Obra();
                 newObra.setData(dataFuncio);
                 newObra.setButDisp(butaques);
                 newObra.setNumBut(numero);
+                newObra.setDia(dia);
                 obres.add(newObra);
                 cont++;
             }while(c.moveToNext());

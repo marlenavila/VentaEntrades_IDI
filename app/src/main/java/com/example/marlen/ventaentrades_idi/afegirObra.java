@@ -32,7 +32,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     private DatePickerDialog toDatePickerDialog;
 
     //format de la data que guardem agafada del calendari
-    private SimpleDateFormat dateFormatter;
+    private SimpleDateFormat dateFormatter, getDia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,9 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_afegir_obra);
 
         //concretem el format de la data
-        dateFormatter = new SimpleDateFormat("dd-MM-yy", Locale.US);
+        dateFormatter = new SimpleDateFormat("dd-MM-yy");
+        getDia = new SimpleDateFormat("c"); //per mostrar el dia de la setmana
+
 
         btAfegir = (Button)findViewById(R.id.afegeix);
 
@@ -138,20 +140,31 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            String dia = getDia.format(new java.sql.Date(dataMilisegs)); //agafa el dia en l'idioma que estigui el sistema
+            if(dia.equals("Mon") || dia.equals("dl.")) dia = "Dilluns";
+            if(dia.equals("Tue") || dia.equals("dt.")) dia = "Dimarts";
+            if(dia.equals("Wed") || dia.equals("dc.")) dia = "Dimecres";
+            if(dia.equals("Thu") || dia.equals("dj.")) dia = "Dijous";
+            if(dia.equals("Fri") || dia.equals("dv.")) dia = "Divendres";
+            if(dia.equals("Sat") || dia.equals("ds.")) dia = "Dissabte";
+            if(dia.equals("Sun") || dia.equals("dg.")) dia = "Diumenge";
             //i passem tota la resta de dades de la obra per guardar-la a la BD
-            ContentValues values = new ContentValues();
-            values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
-            values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
-            values.put(baseDades.CN_DURADA,String.valueOf(durada.getText()));
-            values.put(baseDades.CN_DESC,String.valueOf(descr.getText()));
-            values.put(baseDades.CN_DATA,dataTotal);
-            values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
-            values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
-            values.put(baseDades.CN_BUTAQUES_DISP, (40));
-            values.put(baseDades.CN_CORREUS, ("~"));
-            //creem la obra amb totes les dades corresponents
-            baseDades.createObra(values, "Obra");
-            ++cont; //comptador per controlar quantes entrades em crea a la BD
+            if (dia.equals("Dilluns") || dia.equals("Dimarts")|| dia.equals("Dimecres")) {
+                ContentValues values = new ContentValues();
+                values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
+                values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
+                values.put(baseDades.CN_DURADA, String.valueOf(durada.getText()));
+                values.put(baseDades.CN_DESC, String.valueOf(descr.getText()));
+                values.put(baseDades.CN_DATA, dataTotal);
+                values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
+                values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
+                values.put(baseDades.CN_BUTAQUES_DISP, (40));
+                values.put(baseDades.CN_CORREUS, ("~"));
+                values.put(baseDades.CN_DIA, (dia));
+                //creem la obra amb totes les dades corresponents
+                baseDades.createObra(values, "Obra");
+               // ++cont; //comptador per controlar quantes entrades em crea a la BD
+            }
         }
     }
 
@@ -160,7 +173,6 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.afegeix:
                 calcul_data();
-                Toast.makeText(getApplicationContext(), String.valueOf(cont), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), llistaObres.class);
                 startActivity(intent);
                 finish();

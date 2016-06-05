@@ -28,6 +28,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static String CN_CORREUS = "correus";
 
+    public static String CN_DIA = "dia";
+
 
     //Declaracion del nombre de la base de datos
     public static final int DATABASE_VERSION = 1;
@@ -49,6 +51,7 @@ public class DbHelper extends SQLiteOpenHelper {
             + CN_MILIS + " LONG, "
             + CN_BUTAQUES + " LONG, "
             + CN_CORREUS + " STRING, "
+            + CN_DIA + " STRING, "
             + "PRIMARY KEY (titolObra, data));"; //clau primària composta titol+data
 
 
@@ -65,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllObres() {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                            CN_MILIS, CN_BUTAQUES, CN_CORREUS};
+                            CN_MILIS, CN_BUTAQUES, CN_CORREUS, CN_DIA};
         Cursor c = db.query(
                 true,  //DISTINCT
                 OBRA_TABLE,  // The table to query
@@ -85,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getObra(String titolObra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                            CN_MILIS,CN_BUTAQUES,CN_CORREUS};
+                            CN_MILIS,CN_BUTAQUES,CN_CORREUS, CN_DIA};
         String[] where = {titolObra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -103,7 +106,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getFuncio(String titolObra, String data) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                CN_MILIS,CN_BUTAQUES,CN_CORREUS};
+                CN_MILIS,CN_BUTAQUES,CN_CORREUS, CN_DIA};
         String[] where = {titolObra, data};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -121,7 +124,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllDies(String titolObra) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = {CN_TITOL,CN_DATA,CN_PREU,CN_DURADA,CN_DESC,CN_BUTAQUES_DISP,
-                            CN_MILIS,CN_BUTAQUES,CN_CORREUS};
+                            CN_MILIS,CN_BUTAQUES,CN_CORREUS,CN_DIA};
         String[] where = {titolObra};
         Cursor c = db.query(
                 OBRA_TABLE,  // The table to query
@@ -131,6 +134,22 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,                                   // don't group the rows
                 null,                                   // don't filter by row groups
                 CN_MILIS + " ASC"                       // The sort order és alfabètic
+        );
+        return c;
+    }
+
+    public Cursor getCorreus(String titolObra, String data){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {CN_CORREUS};
+        String[] where = {titolObra, data};
+        Cursor c = db.query(
+                OBRA_TABLE,  // The table to query
+                columns,                                // The columns to return
+                "titolObra=?" + " and " + "data=?",     // The columns for the WHERE clause
+                where,                                  // The values for the WHERE clause
+                null,                                   // don't group the rows
+                null,                                   // don't filter by row groups
+                null                       // The sort order és alfabètic
         );
         return c;
     }
@@ -173,22 +192,6 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(CN_BUTAQUES_DISP,num);
         db.update(OBRA_TABLE, cv, CN_TITOL + "=?" + " and " + CN_DATA + "=?",
                 new String[]{titolObra,data});
-    }
-
-    public Cursor getCorreus(String titolObra, String data){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = {CN_CORREUS};
-        String[] where = {titolObra, data };
-        Cursor c = db.query(
-                OBRA_TABLE,  // The table to query
-                columns,                                // The columns to return
-                "titolObra=?" + " and " + "data=?",     // The columns for the WHERE clause
-                where,                                  // The values for the WHERE clause
-                null,                                   // don't group the rows
-                null,                                   // don't filter by row groups
-                null                       // The sort order és alfabètic
-        );
-        return c;
     }
 
     //actualitzar string de correus d'una funció concreta

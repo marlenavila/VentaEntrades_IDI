@@ -5,7 +5,7 @@ package com.example.marlen.ventaentrades_idi;
  */
 public class Obra {
 
-    private String titol, data, descr, preu;
+    private String titol, data, descr, preu, dia;
     private int  durada,but_disp;
     private long num;
 
@@ -44,4 +44,7 @@ public class Obra {
 
     public Long getNumBut(){ return num; }
     public void setNumBut(long num){ this.num = num; }
+
+    public String getDia(){ return dia; }
+    public void setDia(String dia){ this.dia = dia; }
 }

@@ -27,6 +27,7 @@ public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDay
     public void onBindViewHolder(MyCustomAdapterDays.AdapterViewHolder holder, int position) {
         holder.data.setText(obres.get(position).getData());
         holder.but_disp.setText(obres.get(position).getButDisp().toString());
+        holder.diaFuncio.setText(obres.get(position).getDia());
         if(position %2 == 0)
             holder.itemView.setBackgroundColor(0xFFCFD8DC);
         else holder.itemView.setBackgroundColor(0xFFB0BEC5);
@@ -40,13 +41,14 @@ public class MyCustomAdapterDays extends RecyclerView.Adapter<MyCustomAdapterDay
     }
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder{
-        public TextView data, but_disp;
+        public TextView data, but_disp, diaFuncio;
         public View v;
         public AdapterViewHolder(View itemView) {
             super(itemView);
             this.v = itemView;
             this.data = (TextView)itemView.findViewById(R.id.dataDays);
             this.but_disp = (TextView)itemView.findViewById(R.id.num_but);
+            this.diaFuncio = (TextView)itemView.findViewById(R.id.diaSet);
         }
     }
 
