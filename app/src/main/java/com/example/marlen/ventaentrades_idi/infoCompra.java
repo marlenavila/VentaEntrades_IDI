@@ -24,7 +24,7 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
     int  numbutaquesIni, entrades;
     String data;
     double aux2 = 0.0, preuObra = 0.0;
-    DecimalFormat preuTotal = new DecimalFormat("#.00");
+    DecimalFormat preuTotal = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

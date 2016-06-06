@@ -11,7 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class llistaFuncions extends AppCompatActivity implements RecyclerItemClickListener.OnItemClickListener {
 
@@ -21,7 +25,8 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
     MyCustomAdapterDays myCustomAdapterDays;
     String titolRec;
     Intent intent;
-    int pos;
+    long dataMilisegs, currentDateMilis;
+    SimpleDateFormat dateFormatter;
 
     ArrayList<Obra> obres = new ArrayList<>();
 
@@ -34,6 +39,8 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
         recView = (RecyclerView)findViewById(R.id.mRecyclerViewDays);
         manager = new LinearLayoutManager(this);
 
+        dateFormatter = new SimpleDateFormat("dd-MM-yy");
+
         recView.setLayoutManager(manager);
         recView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
 
@@ -41,7 +48,6 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
         titolRec = b.getString("titol");
 
         Cursor c = baseDades.getAllDies(titolRec);
-        int cont = 0;
         //comprovo que la BD no estigui buida
         if(c.moveToFirst()){
             do{
@@ -55,10 +61,8 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
                 newObra.setNumBut(numero);
                 newObra.setDia(dia);
                 obres.add(newObra);
-                cont++;
             }while(c.moveToNext());
         }
-        Toast.makeText(getApplicationContext(), String.valueOf(cont), Toast.LENGTH_SHORT).show();
 
         myCustomAdapterDays = new MyCustomAdapterDays();
         recView.setAdapter(myCustomAdapterDays);
@@ -67,14 +71,32 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
 
     @Override
     public void onItemClick(View childView, int position) {
-        Bundle b = new Bundle();
-        b.putString("titol",titolRec);
-        b.putInt("butaques", obres.get(position).getButDisp());
-        b.putLong("numero", obres.get(position).getNumBut());
-        b.putString("data", obres.get(position).getData());
-        intent = new Intent(getApplicationContext(), PatiButaques.class);
-        intent.putExtras(b);
-        startActivity(intent);
+        String dataFuncio = obres.get(position).getData();
+        try {
+            Date oldDate = dateFormatter.parse(dataFuncio);
+            dataMilisegs = oldDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date currentDate = new Date();
+        currentDate.getTime();
+        currentDateMilis = currentDate.getTime();
+        if (currentDateMilis > dataMilisegs+86400000){
+            Toast.makeText(getApplicationContext(), "Aquesta funció ja no està disponible", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (obres.get(position).getButDisp() > 0) {
+                Bundle b = new Bundle();
+                b.putString("titol", titolRec);
+                b.putInt("butaques", obres.get(position).getButDisp());
+                b.putLong("numero", obres.get(position).getNumBut());
+                b.putString("data", obres.get(position).getData());
+                intent = new Intent(getApplicationContext(), PatiButaques.class);
+                intent.putExtras(b);
+                startActivity(intent);
+            } else
+                Toast.makeText(getApplicationContext(), "Ja s'han venut totes les entrades", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Per fer una acció concreta si una de les files es manté clickada (mètode classe RecyclerItemClickListener)

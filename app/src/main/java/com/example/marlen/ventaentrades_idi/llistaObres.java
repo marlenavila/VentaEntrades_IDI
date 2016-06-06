@@ -172,11 +172,6 @@ public class llistaObres extends AppCompatActivity implements RecyclerItemClickL
 
     @Override
     public void onItemLongPress(View childView, int position) {
-        long num = 0;
-        int i = 3;
-        num |= (1<<i);
-        num^=(1<<i);
-        Boolean hola = (num&(1<<i)) != 0;
-        Toast.makeText(getApplicationContext(), hola.toString(), Toast.LENGTH_SHORT).show();
+
     }
 }
