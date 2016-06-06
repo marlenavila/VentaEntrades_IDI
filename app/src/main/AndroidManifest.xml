@@ -27,7 +27,8 @@
         <activity android:name=".PatiButaques" />
         <activity android:name=".llistaCompradors" />
         <activity android:name=".infoCompra" />
-        <activity android:name=".Estadistiques"></activity>
+        <activity android:name=".Estadistiques" />
+        <activity android:name=".Help"></activity>
     </application>
 
 </manifest>
