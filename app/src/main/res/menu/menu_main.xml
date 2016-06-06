@@ -5,7 +5,7 @@
     <item
         android:id="@+id/borrarBD"
         android:orderInCategory="100"
-        android:title="Borrar BD"
+        android:title="Esborrar dades"
         app:showAsAction="never" />
     <item
         android:id="@+id/initData"

@@ -74,9 +74,6 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
             startActivity(intent);
             return true;
         }
-        if (id == R.id.modificarDades){
-            return true;
-        }
         if (id == R.id.eliminarObra){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Eliminar obra");

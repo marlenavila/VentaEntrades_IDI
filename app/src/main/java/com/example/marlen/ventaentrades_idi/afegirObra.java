@@ -104,6 +104,18 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     void calcul_data() {
         //agafo els valors de la data inicial i final per poder calcular l'interval de dies
         //triat per l'usuari
+        trobat = false;
+        Cursor c = baseDades.getAllObres();
+        if (c.moveToFirst()) {
+            do {
+                String aux = c.getString(c.getColumnIndex(baseDades.CN_TITOL));
+                if (aux.equals(titol.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Aquesta obra ja existeix", Toast.LENGTH_SHORT).show();
+                    trobat = true;
+                    return;
+                }
+            } while (c.moveToNext());
+        }
         data1 = dataIni.getText().toString();
         //ho separo per dia, mes i any per poder fer els càlculs i concatenacions corresponents
         diaIni = String.valueOf(data1.charAt(0)) + String.valueOf(data1.charAt(1)); //dia
@@ -118,6 +130,10 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         diaFinal = Integer.valueOf(diaFi);
         mesFinal = Integer.valueOf(mesFi);
 
+        if(!anyIni.equals(anyFi)){
+            Toast.makeText(getApplicationContext(), "Data incorrecta", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (mesInicial < mesFinal) {
             while (mesInicial < mesFinal) {
                 //cas amb els mesos que tenen 31 dies
@@ -145,23 +161,17 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         if(descr.getText().toString().isEmpty()) return true;
         if(dataIni.getText().toString().equals("Selecciona data d'inici")) return true;
         if(dataFi.getText().toString().equals("Selecciona data final")) return true;
-
-        return false;
+        if(dilluns.isChecked()) return false;
+        if(dimarts.isChecked()) return false;
+        if(dimecres.isChecked()) return false;
+        if(dijous.isChecked()) return false;
+        if(divendres.isChecked()) return false;
+        if(dissabte.isChecked()) return false;
+        if(diumenge.isChecked()) return false;
+        return true;
     }
 
     void calcul_dies(int dia1, int dia2) {
-        trobat = false;
-        Cursor c = baseDades.getAllObres();
-        if (c.moveToFirst()) {
-            do {
-                String aux = c.getString(c.getColumnIndex(baseDades.CN_TITOL));
-                if (aux.equals(titol.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Aquesta obra ja existeix", Toast.LENGTH_SHORT).show();
-                    trobat = true;
-                    return;
-                }
-            } while (c.moveToNext());
-        }
         int i;
         cont = 0;
         for (i = dia1; i <= dia2; ++i) {
@@ -238,7 +248,9 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.afegeix:
-                calcul_data();
+                if(comprovar_camps())
+                    Toast.makeText(getApplicationContext(), "Has d'emplenar tots els camps", Toast.LENGTH_SHORT).show();
+                else calcul_data();
                 break;
             case R.id.dataInit:
                 fromDatePickerDialog.show();
