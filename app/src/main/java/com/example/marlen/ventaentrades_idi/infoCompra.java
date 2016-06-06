@@ -17,7 +17,7 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
 
     TextView titolObra, preu;
     EditText correu;
-    long num;
+    long hola,num;
     DbHelper baseDades;
     RadioButton CJove, CAturat, CUniv;
     ImageView done;
@@ -46,10 +46,11 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
         CUniv = (RadioButton)findViewById(R.id.radiouniversitari);
 
         Bundle b = getIntent().getExtras();
-        num = b.getLong("numero");
+        hola = b.getLong("numero");
         titolObra.setText(b.getString("titol"));
         entrades = b.getInt("entrades");
         data = b.getString("data");
+        num = b.getLong("numIni");
        // numbutaquesSelec = b.getInt("numButs"); //num butaques seleccionades
         Cursor c = baseDades.getFuncio(titolObra.getText().toString(),data);
         if(c.moveToFirst()) {
@@ -94,14 +95,27 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
                 if(correu.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Has d'afegir el correu com a mínim", Toast.LENGTH_SHORT).show();
                 else {
-                    baseDades.updateNum(titolObra.getText().toString(), data, num);
+                    baseDades.updateNum(titolObra.getText().toString(), data, hola);
                     baseDades.updateNumButDisp(titolObra.getText().toString(), data, numbutaquesIni - entrades);
                     baseDades.updateCorreus(titolObra.getText().toString(), data, correu.getText().toString());
                     Intent intent = new Intent(getApplicationContext(), llistaObres.class);
                     startActivity(intent);
+                    finish();
                 }
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Bundle b = new Bundle();
+        b.putString("titol", titolObra.getText().toString());
+        b.putLong("numero", num);
+        b.putString("data", data);
+        Intent intent = new Intent(getApplicationContext(), PatiButaques.class);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
     }
 }

@@ -122,6 +122,7 @@ public class infoObra extends AppCompatActivity implements View.OnClickListener 
                 intent = new Intent(getApplicationContext(), llistaFuncions.class);
                 intent.putExtras(b);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

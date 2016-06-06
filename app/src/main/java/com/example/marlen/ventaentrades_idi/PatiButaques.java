@@ -65,10 +65,12 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
                     b.putInt("entrades", num_entrades);
                     b.putLong("numero", hola);
                     b.putString("data", data);
+                    b.putLong("numIni", num);
                     //b.putInt("numButs", num_butaques_disp);
                     Intent intent = new Intent(getApplicationContext(), infoCompra.class);
                     intent.putExtras(b);
                     startActivity(intent);
+                    finish();
                 }
                 break;
             default:
@@ -88,5 +90,15 @@ public class PatiButaques extends AppCompatActivity implements View.OnClickListe
                 }
         }
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        Bundle b = new Bundle();
+        b.putString("titol", titolEsc.getText().toString());
+        Intent intent = new Intent(getApplicationContext(), llistaFuncions.class);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
     }
 }

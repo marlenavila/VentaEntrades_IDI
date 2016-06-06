@@ -94,6 +94,7 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
                 intent = new Intent(getApplicationContext(), PatiButaques.class);
                 intent.putExtras(b);
                 startActivity(intent);
+                finish();
             } else
                 Toast.makeText(getApplicationContext(), "Ja s'han venut totes les entrades", Toast.LENGTH_SHORT).show();
         }
@@ -125,5 +126,15 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Bundle b = new Bundle();
+        b.putString("titol", titolRec);
+        intent = new Intent(getApplicationContext(), infoObra.class);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
     }
 }

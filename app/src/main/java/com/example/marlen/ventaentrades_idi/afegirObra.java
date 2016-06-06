@@ -138,6 +138,17 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    boolean comprovar_camps(){
+        if(titol.getText().toString().isEmpty()) return true;
+        if(preu.getText().toString().isEmpty()) return true;
+        if(durada.getText().toString().isEmpty()) return true;
+        if(descr.getText().toString().isEmpty()) return true;
+        if(dataIni.getText().toString().equals("Selecciona data d'inici")) return true;
+        if(dataFi.getText().toString().equals("Selecciona data final")) return true;
+
+        return false;
+    }
+
     void calcul_dies(int dia1, int dia2) {
         trobat = false;
         Cursor c = baseDades.getAllObres();
@@ -228,11 +239,6 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.afegeix:
                 calcul_data();
-                //  if(!trobat) {
-                   /* Intent intent = new Intent(getApplicationContext(), llistaObres.class);
-                    startActivity(intent);
-                    finish();*/
-                //}
                 break;
             case R.id.dataInit:
                 fromDatePickerDialog.show();
