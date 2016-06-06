@@ -3,6 +3,7 @@ package com.example.marlen.ventaentrades_idi;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
     int diaInicial, diaFinal, mesInicial, mesFinal, cont;
     long dataMilisegs;
     Switch dilluns, dimarts, dimecres, dijous, divendres, dissabte, diumenge;
+    boolean trobat;
 
     //per les dates d'inici i final
     private DatePickerDialog fromDatePickerDialog;
@@ -151,57 +153,68 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            ContentValues values = new ContentValues();
-            values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
-            values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
-            values.put(baseDades.CN_DURADA, String.valueOf(durada.getText()));
-            values.put(baseDades.CN_DESC, String.valueOf(descr.getText()));
-            values.put(baseDades.CN_DATA, dataTotal);
-            values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
-            values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
-            values.put(baseDades.CN_BUTAQUES_DISP, (40));
-            values.put(baseDades.CN_CORREUS, ("~"));
-            String dia = getDia.format(new java.sql.Date(dataMilisegs)); //agafa el dia en l'idioma que estigui el sistema
-            if(dilluns.isChecked()){
-                if(dia.equals("Mon") || dia.equals("dl.")){
-                    values.put(baseDades.CN_DIA, ("Dilluns"));
-                    baseDades.createObra(values, "Obra");
-                }
+            trobat = false;
+            Cursor c = baseDades.getAllObres();
+            if(c.moveToFirst()){
+                do{
+                    String aux = c.getString(c.getColumnIndex(baseDades.CN_TITOL));
+                    if(aux.equals(titol.getText().toString())) trobat = true;
+                }while(c.moveToNext() && !trobat);
             }
-            if(dimarts.isChecked()){
-                if(dia.equals("Tue") || dia.equals("dt.")){
-                    values.put(baseDades.CN_DIA, ("Dimarts"));
-                    baseDades.createObra(values, "Obra");
+            if(trobat) Toast.makeText(getApplicationContext(), "Aquesta obra ja existeix", Toast.LENGTH_SHORT).show();
+            else {
+                ContentValues values = new ContentValues();
+                values.put(baseDades.CN_TITOL, String.valueOf(titol.getText())); //content values per passar valor a la BD
+                values.put(baseDades.CN_PREU, String.valueOf(preu.getText()));
+                values.put(baseDades.CN_DURADA, String.valueOf(durada.getText()));
+                values.put(baseDades.CN_DESC, String.valueOf(descr.getText()));
+                values.put(baseDades.CN_DATA, dataTotal);
+                values.put(baseDades.CN_MILIS, String.valueOf(dataMilisegs));
+                values.put(baseDades.CN_BUTAQUES, String.valueOf(0));
+                values.put(baseDades.CN_BUTAQUES_DISP, (40));
+                values.put(baseDades.CN_CORREUS, ("~"));
+                String dia = getDia.format(new java.sql.Date(dataMilisegs)); //agafa el dia en l'idioma que estigui el sistema
+                if (dilluns.isChecked()) {
+                    if (dia.equals("Mon") || dia.equals("dl.")) {
+                        values.put(baseDades.CN_DIA, ("Dilluns"));
+                        baseDades.createObra(values, "Obra");
+                    }
                 }
-            }
-            if(dimecres.isChecked()){
-                if(dia.equals("Wed") || dia.equals("dc.")){
-                    values.put(baseDades.CN_DIA, ("Dimecres"));
-                    baseDades.createObra(values, "Obra");
+                if (dimarts.isChecked()) {
+                    if (dia.equals("Tue") || dia.equals("dt.")) {
+                        values.put(baseDades.CN_DIA, ("Dimarts"));
+                        baseDades.createObra(values, "Obra");
+                    }
                 }
-            }
-            if(dijous.isChecked()){
-                if(dia.equals("Thu") || dia.equals("dj.")){
-                    values.put(baseDades.CN_DIA, ("Dijous"));
-                    baseDades.createObra(values, "Obra");
+                if (dimecres.isChecked()) {
+                    if (dia.equals("Wed") || dia.equals("dc.")) {
+                        values.put(baseDades.CN_DIA, ("Dimecres"));
+                        baseDades.createObra(values, "Obra");
+                    }
                 }
-            }
-            if(divendres.isChecked()){
-                if(dia.equals("Fri") || dia.equals("dv.")){
-                    values.put(baseDades.CN_DIA, ("Divendres"));
-                    baseDades.createObra(values, "Obra");
+                if (dijous.isChecked()) {
+                    if (dia.equals("Thu") || dia.equals("dj.")) {
+                        values.put(baseDades.CN_DIA, ("Dijous"));
+                        baseDades.createObra(values, "Obra");
+                    }
                 }
-            }
-            if(dissabte.isChecked()){
-                if(dia.equals("Sat") || dia.equals("ds.")){
-                    values.put(baseDades.CN_DIA, ("Dissabte"));
-                    baseDades.createObra(values, "Obra");
+                if (divendres.isChecked()) {
+                    if (dia.equals("Fri") || dia.equals("dv.")) {
+                        values.put(baseDades.CN_DIA, ("Divendres"));
+                        baseDades.createObra(values, "Obra");
+                    }
                 }
-            }
-            if(diumenge.isChecked()){
-                if(dia.equals("Sun") || dia.equals("dg.")){
-                    values.put(baseDades.CN_DIA, ("Diumenge"));
-                    baseDades.createObra(values, "Obra");
+                if (dissabte.isChecked()) {
+                    if (dia.equals("Sat") || dia.equals("ds.")) {
+                        values.put(baseDades.CN_DIA, ("Dissabte"));
+                        baseDades.createObra(values, "Obra");
+                    }
+                }
+                if (diumenge.isChecked()) {
+                    if (dia.equals("Sun") || dia.equals("dg.")) {
+                        values.put(baseDades.CN_DIA, ("Diumenge"));
+                        baseDades.createObra(values, "Obra");
+                    }
                 }
             }
         }
@@ -212,9 +225,11 @@ public class afegirObra extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.afegeix:
                 calcul_data();
-                Intent intent = new Intent(getApplicationContext(), llistaObres.class);
-                startActivity(intent);
-                finish();
+                if(!trobat) {
+                    Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
             case R.id.dataInit:
                 fromDatePickerDialog.show();
