@@ -91,11 +91,15 @@ public class infoCompra extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case (R.id.done):
-                baseDades.updateNum(titolObra.getText().toString(),data,num);
-                baseDades.updateNumButDisp(titolObra.getText().toString(),data,numbutaquesIni-entrades);
-                baseDades.updateCorreus(titolObra.getText().toString(),data,correu.getText().toString());
-                Intent intent = new Intent(getApplicationContext(), llistaObres.class);
-                startActivity(intent);
+                if(correu.getText().toString().isEmpty())
+                    Toast.makeText(getApplicationContext(), "Has d'afegir el correu com a mínim", Toast.LENGTH_SHORT).show();
+                else {
+                    baseDades.updateNum(titolObra.getText().toString(), data, num);
+                    baseDades.updateNumButDisp(titolObra.getText().toString(), data, numbutaquesIni - entrades);
+                    baseDades.updateCorreus(titolObra.getText().toString(), data, correu.getText().toString());
+                    Intent intent = new Intent(getApplicationContext(), llistaObres.class);
+                    startActivity(intent);
+                }
                 break;
 
         }
