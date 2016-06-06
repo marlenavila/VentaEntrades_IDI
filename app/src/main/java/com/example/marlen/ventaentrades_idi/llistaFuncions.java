@@ -103,6 +103,8 @@ public class llistaFuncions extends AppCompatActivity implements RecyclerItemCli
     @Override
     public void onItemLongPress(View childView, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Llistat compradors");
+        builder.setIcon(R.drawable.list);
         builder.setMessage("Vols veure els compradors d'aquesta funció?");
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override

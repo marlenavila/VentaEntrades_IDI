@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".llistaFuncions">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Funcions programades"
             android:id="@+id/obresActuals"
-            android:textSize="30dp"
+            android:textSize="35dp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:textColor="#070707" />
+        <TextView
+            android:id="@+id/cosas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Per veure el llistat de compradors mantenir pitjada la funció corresponent."
+            android:textSize="15dp" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -31,6 +41,6 @@
         android:background="#ffffff"
         android:id="@+id/mRecyclerViewDays"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="10dp" />
 
-</RelativeLayout>
+</LinearLayout>
